@@ -6,6 +6,7 @@ export interface User {
   id: string;
   name: string;
   phone: string;
+  email: string;
   updatedAt: string;
   createdAt: string;
   called: boolean;
@@ -61,17 +62,23 @@ export interface User {
 <template>
   
   <div class="tableWrapper">
-    <v-table>
+    <v-table class="v-table">
        <thead>
          <tr>
            <th class="text-left">
              Phone
            </th>
            <th class="text-left">
+             Email
+           </th>
+           <th class="text-left">
              Status
            </th>
            <th class="text-left">
              Change Status
+           </th>
+           <th class="text-left">
+             Delete user
            </th>
          </tr>
        </thead>
@@ -81,6 +88,7 @@ export interface User {
          :key="user.id"
          >
          <td class="phoneNumber">{{ user.phone }}</td>
+         <td class="email">{{ user.email }}</td>
          <td v-if="user.called" class="alreadyCalled">already called</td>
          <td v-else class="notCalled">not called</td>
          <td> <v-btn  @click="updateUser(user.id, user.called)"> Change</v-btn></td>
@@ -93,12 +101,15 @@ export interface User {
 
 
 <style scoped>
+
   .tableWrapper {
-    width: 100%;
-    max-width: 600px;
+    width: 90%;
     margin: 0 auto;
   }
 
+  .v-table {
+    overflow-x: scroll !important;
+  }
   .phoneNumber {
     letter-spacing: 1.2px;
   }
